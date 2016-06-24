@@ -1,0 +1,5 @@
+C:\YamInjection\YamInjection\YamInjection\bin\Debug\YamInjection.dll
+C:\YamInjection\YamInjection\YamInjection\bin\Debug\YamInjection.pdb
+C:\YamInjection\YamInjection\YamInjection\obj\Debug\YamInjection.csprojResolveAssemblyReference.cache
+C:\YamInjection\YamInjection\YamInjection\obj\Debug\YamInjection.dll
+C:\YamInjection\YamInjection\YamInjection\obj\Debug\YamInjection.pdb

@@ -1,0 +1,7 @@
+C:\YamInjection\YamInjection\SomeGreatLibrary\bin\Debug\SomeGreatLibrary.dll
+C:\YamInjection\YamInjection\SomeGreatLibrary\bin\Debug\SomeGreatLibrary.pdb
+C:\YamInjection\YamInjection\SomeGreatLibrary\bin\Debug\YamInjection.dll
+C:\YamInjection\YamInjection\SomeGreatLibrary\bin\Debug\YamInjection.pdb
+C:\YamInjection\YamInjection\SomeGreatLibrary\obj\Debug\SomeGreatLibrary.csprojResolveAssemblyReference.cache
+C:\YamInjection\YamInjection\SomeGreatLibrary\obj\Debug\SomeGreatLibrary.dll
+C:\YamInjection\YamInjection\SomeGreatLibrary\obj\Debug\SomeGreatLibrary.pdb
