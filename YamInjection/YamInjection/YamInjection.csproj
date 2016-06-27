@@ -40,27 +40,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyMappedResolutionEvent.cs" />
-    <Compile Include="AssemblyScanner.cs" />
-    <Compile Include="ConcreteAndInterfacePair.cs" />
-    <Compile Include="ConcreteMap.cs" />
-    <Compile Include="ConcreteTypeMapping.cs" />
-    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Internals\AssemblyScanner.cs" />
+    <Compile Include="Internals\ConcreteAndInterfacePair.cs" />
+    <Compile Include="Internals\ConcreteMap.cs" />
+    <Compile Include="Internals\ConcreteTypeMapping.cs" />
+    <Compile Include="Internals\FactorizedMapping.cs" />
+    <Compile Include="Internals\FactorizedResolutionEvent.cs" />
+    <Compile Include="IInjectionMap.cs" />
     <Compile Include="IInjectionScope.cs" />
     <Compile Include="IInjectionParameter.cs" />
     <Compile Include="IMapTo.cs" />
-    <Compile Include="InjectionMap.cs" />
-    <Compile Include="InjectionMapFactory.cs" />
     <Compile Include="InjectionScope.cs" />
     <Compile Include="InjectionScopeFactory.cs" />
+    <Compile Include="Internals\AssemblyMappedResolutionEvent.cs" />
+    <Compile Include="Internals\DependencyResolver.cs" />
+    <Compile Include="Internals\InjectionMap.cs" />
+    <Compile Include="Internals\InjectionMapSeed.cs" />
+    <Compile Include="Internals\MapRegistrar.cs" />
+    <Compile Include="IResolutionEvent.cs" />
     <Compile Include="NamedParameter.cs" />
-    <Compile Include="NoPublicConstructorException.cs" />
-    <Compile Include="ParameterTypeNotDefinedException.cs" />
+    <Compile Include="Exceptions\NoPublicConstructorException.cs" />
+    <Compile Include="Exceptions\ParameterTypeNotDefinedException.cs" />
     <Compile Include="PositionedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResolutionEvent.cs" />
-    <Compile Include="ResolutionEventBase.cs" />
-    <Compile Include="ResolutionEventEnum.cs" />
+    <Compile Include="Internals\InterfaceConcretePairResolutionEvent.cs" />
+    <Compile Include="Internals\ResolutionEventBase.cs" />
+    <Compile Include="Internals\ResolutionEventEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

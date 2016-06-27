@@ -5,6 +5,7 @@ namespace YamInjection
 {
     public interface IInjectionScope : IDisposable
     {
+        bool IsDisposed { get; }
         IInjectionScope BeginNewInjectionScope();
 
         void UseMap(IInjectionMap injectionMap);
@@ -17,7 +18,5 @@ namespace YamInjection
 
         bool TryResolve<T>(out T resolvedValue);
         bool TryResolve<T>(out T resolvedValue, params IInjectionParameter[] parameters);
-
-        bool IsDisposed { get; }
     }
 }

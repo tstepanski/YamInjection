@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YamInjection
+namespace YamInjection.Internals
 {
     internal class ConcreteAndInterfacePair
     {

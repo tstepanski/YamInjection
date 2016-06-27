@@ -1,19 +1,17 @@
-﻿using System.Reflection;
-using YamInjection;
+﻿using YamInjection.Internals;
 
 namespace SomeGreatLibrary
 {
-    public static class GreatInjectionMap
+    public class GreatInjectionMap : InjectionMap
     {
-        public static IInjectionMap GetInjectionMap()
+        public override void Register()
         {
-            var injectionMap = InjectionMapFactory.NewMap();
+            MapAssembly(MyAssembly)
+                .ResolveEveryRequest();
 
-            var thisAssembly = Assembly.GetAssembly(typeof(GreatInjectionMap));
-
-            injectionMap.MapAssembly(thisAssembly).ResolveEveryRequest();
-
-            return injectionMap;
+            Map<SomeDbContext>()
+                .Using(() => new SomeDbContext("someConnectionString"))
+                .ResolveEveryRequest();
         }
     }
 }

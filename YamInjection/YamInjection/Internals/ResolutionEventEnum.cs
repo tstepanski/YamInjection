@@ -1,6 +1,6 @@
-﻿namespace YamInjection
+﻿namespace YamInjection.Internals
 {
-    public enum ResolutionEventEnum
+    internal enum ResolutionEventEnum
     {
         EveryRequest = 1,
         OncePerScope = 2,

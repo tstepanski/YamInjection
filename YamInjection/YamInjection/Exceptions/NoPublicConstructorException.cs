@@ -1,16 +1,19 @@
 using System;
 
-namespace YamInjection
+namespace YamInjection.Exceptions
 {
     [Serializable]
     public sealed class NoPublicConstructorException : Exception
     {
         internal NoPublicConstructorException(Type type)
-            : base($"No public constructor defined for the given type {type.Name}")
+            : base(GetMessageFromType(type))
         {
             Type = type;
         }
 
         public Type Type { get; }
+
+        private static string GetMessageFromType(Type type)
+            => $"No public constructor defined for the given type {type.Name}";
     }
 }

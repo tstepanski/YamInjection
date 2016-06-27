@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GreatInjectionMap.cs" />
+    <Compile Include="SomeDbContext.cs" />
     <Compile Include="SomeEvenLessGreatImplementationOfAnAbstractClass.cs" />
     <Compile Include="SomeGreatRepository.cs" />
     <Compile Include="SomeGreatService.cs" />

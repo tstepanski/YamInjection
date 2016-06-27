@@ -9,3 +9,14 @@ C:\YamInjection\YamInjection\YamInjectionTests\bin\Debug\Microsoft.VisualStudio.
 C:\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.csprojResolveAssemblyReference.cache
 C:\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.dll
 C:\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.pdb
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\YamInjection.Tests.dll
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\YamInjection.Tests.pdb
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\SomeGreatLibrary.dll
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\YamInjection.dll
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\SomeGreatLibrary.pdb
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\YamInjection.pdb
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.csprojResolveAssemblyReference.cache
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.dll
+C:\Users\tstepanski\Source\Repos\YamInjection\YamInjection\YamInjectionTests\obj\Debug\YamInjection.Tests.pdb

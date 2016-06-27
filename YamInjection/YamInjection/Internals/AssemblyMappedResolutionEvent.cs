@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace YamInjection
+namespace YamInjection.Internals
 {
     internal sealed class AssemblyMappedResolutionEvent : ResolutionEventBase
     {
@@ -14,7 +14,7 @@ namespace YamInjection
 
         protected override void CompleteMapping(ResolutionEventEnum resolutionEventEnum)
         {
-            Map.RegisterAllMappings(_concreteAndInterfacePairs, resolutionEventEnum);
+            MapRegistrar.RegisterAllMappings(Map, _concreteAndInterfacePairs, resolutionEventEnum);
         }
     }
 }

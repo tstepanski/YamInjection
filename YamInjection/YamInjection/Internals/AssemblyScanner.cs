@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace YamInjection
+namespace YamInjection.Internals
 {
     internal sealed class AssemblyScanner
     {

@@ -1,12 +1,5 @@
-namespace YamInjection
+namespace YamInjection.Internals
 {
-    public interface IResolutionEvent
-    {
-        IInjectionMap ResolveEveryRequest();
-        IInjectionMap ResolveOncePerScope();
-        IInjectionMap ResolveOnlyOnce();
-    }
-
     internal abstract class ResolutionEventBase : IResolutionEvent
     {
         protected InjectionMap Map;

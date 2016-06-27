@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using YamInjection.Internals;
 
 namespace YamInjection
 {
@@ -15,7 +16,7 @@ namespace YamInjection
 
             _childrenScopes = new HashSet<IInjectionScope>();
 
-            _injectionMap = InjectionMap.NewMap();
+            _injectionMap = new InjectionMapSeed();
         }
 
         public void Dispose()
@@ -54,7 +55,7 @@ namespace YamInjection
         {
             var interfaceType = typeof(T);
 
-            return DependencyResolver.ResolveAll(_injectionMap, interfaceType, parameters).Cast<T>();
+            return DependencyResolver.ResolveAll(this, _injectionMap, interfaceType, parameters).Cast<T>();
         }
 
         public bool TryResolve<T>(out T resolvedValue) => TryResolve(out resolvedValue, new IInjectionParameter[0]);
