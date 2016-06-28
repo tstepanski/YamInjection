@@ -84,9 +84,7 @@ namespace YamInjection.Internals
         internal static void RegisterFactory<TConcrete>(IInjectionMap injectionMap, Type interfaceType,
             Func<IInjectionScope, TConcrete> factory, ResolutionEventEnum resolutionEventEnum)
         {
-            Func<IInjectionScope, object> wrappedFunction = scope => factory(scope);
-
-            var mapping = new FactorizedMapping(wrappedFunction, resolutionEventEnum);
+            var mapping = new FactorizedMapping<TConcrete>(factory, resolutionEventEnum);
 
             AddMappingForType(injectionMap, interfaceType, mapping);
         }

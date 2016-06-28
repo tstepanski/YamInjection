@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace YamInjection
 {
-    public interface IInjectionScope : IDisposable
+    public interface IInjectionScope : IDisposable, IEquatable<IInjectionScope>
     {
         bool IsDisposed { get; }
         IInjectionScope BeginNewInjectionScope();

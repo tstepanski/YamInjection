@@ -35,5 +35,64 @@ namespace YamInjection.Tests
                 Assert.IsNotNull(dbContext);
             }
         }
+
+        [TestMethod]
+        public void Resolve_GivenResolutionSetToInstancePerScope_ResolvesOnlyOnceForScope()
+        {
+            var injectionMap = new GreatInjectionMap();
+
+            using (var scope = InjectionScopeFactory.BeginNewInjectionScope())
+            {
+                scope.UseMap(injectionMap);
+
+                var dbContextA = scope.Resolve<SomeDbContext>();
+
+                var dbContextB = scope.Resolve<SomeDbContext>();
+
+                Assert.AreSame(dbContextA, dbContextB);
+            }
+        }
+
+        [TestMethod]
+        public void Resolve_GivenResolutionSetToInstancePerScope_ResolvesNewInstanceForEachScope()
+        {
+            var injectionMap = new GreatInjectionMap();
+
+            SomeDbContext dbContextA;
+            SomeDbContext dbContextB;
+
+            using (var scope = InjectionScopeFactory.BeginNewInjectionScope())
+            {
+                scope.UseMap(injectionMap);
+
+                dbContextA = scope.Resolve<SomeDbContext>();
+            }
+
+            using (var scope = InjectionScopeFactory.BeginNewInjectionScope())
+            {
+                scope.UseMap(injectionMap);
+
+                dbContextB = scope.Resolve<SomeDbContext>();
+            }
+
+            Assert.AreNotSame(dbContextA, dbContextB);
+        }
+
+        [TestMethod]
+        public void Resolve_GivenResolutionSetToInstancePerRequest_ResolvesNewInstanceForEachRequest()
+        {
+            var injectionMap = new GreatInjectionMap();
+
+            using (var scope = InjectionScopeFactory.BeginNewInjectionScope())
+            {
+                scope.UseMap(injectionMap);
+
+                var greatServiceA = scope.Resolve<ISomeGreatService>();
+
+                var greatServiceB = scope.Resolve<ISomeGreatService>();
+
+                Assert.AreNotSame(greatServiceA, greatServiceB);
+            }
+        }
     }
 }

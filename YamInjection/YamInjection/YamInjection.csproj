@@ -56,7 +56,14 @@
     <Compile Include="Internals\DependencyResolver.cs" />
     <Compile Include="Internals\InjectionMap.cs" />
     <Compile Include="Internals\InjectionMapSeed.cs" />
+    <Compile Include="Internals\InstanceNotYetResolvedException.cs" />
+    <Compile Include="Internals\MappingBase.cs" />
     <Compile Include="Internals\MapRegistrar.cs" />
+    <Compile Include="Internals\PerRequestInstanceResolver.cs" />
+    <Compile Include="Internals\Resolver.cs" />
+    <Compile Include="Internals\ResolverFactory.cs" />
+    <Compile Include="Internals\ScopedInstanceResolver.cs" />
+    <Compile Include="Internals\SingleInstanceResolver.cs" />
     <Compile Include="IResolutionEvent.cs" />
     <Compile Include="NamedParameter.cs" />
     <Compile Include="Exceptions\NoPublicConstructorException.cs" />

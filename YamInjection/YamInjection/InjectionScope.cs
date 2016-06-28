@@ -8,6 +8,7 @@ namespace YamInjection
     internal sealed class InjectionScope : IInjectionScope
     {
         private readonly ICollection<IInjectionScope> _childrenScopes;
+        private readonly Guid _scopeGuid;
         private IInjectionMap _injectionMap;
 
         internal InjectionScope()
@@ -17,6 +18,8 @@ namespace YamInjection
             _childrenScopes = new HashSet<IInjectionScope>();
 
             _injectionMap = new InjectionMapSeed();
+
+            _scopeGuid = Guid.NewGuid();
         }
 
         public void Dispose()
@@ -77,6 +80,13 @@ namespace YamInjection
         }
 
         public bool IsDisposed { get; }
+
+        public bool Equals(IInjectionScope other)
+        {
+            var otherAsInjectionScope = other as InjectionScope;
+
+            return otherAsInjectionScope != null && _scopeGuid.Equals(otherAsInjectionScope._scopeGuid);
+        }
 
         private IEnumerable<IInjectionScope> GetAllUndisposedChildrenScopes()
             => _childrenScopes.Where(scope => !scope.IsDisposed);

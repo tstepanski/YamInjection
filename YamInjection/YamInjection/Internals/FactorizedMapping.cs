@@ -2,14 +2,19 @@
 
 namespace YamInjection.Internals
 {
-    internal sealed class FactorizedMapping : MappingBase
+    internal interface IFactorizedMapping
     {
-        internal FactorizedMapping(Func<IInjectionScope, object> factory, ResolutionEventEnum resolutionEvent)
-            : base(resolutionEvent)
+        Func<IInjectionScope, object> Factory { get; }
+    }
+
+    internal sealed class FactorizedMapping<TConcrete> : MappingBase, IFactorizedMapping
+    {
+        internal FactorizedMapping(Func<IInjectionScope, TConcrete> factory, ResolutionEventEnum resolutionEvent)
+            : base(resolutionEvent, typeof(TConcrete))
         {
-            Factory = factory;
+            Factory = scope => factory(scope);
         }
 
-        internal Func<IInjectionScope, object> Factory { get; }
+        public Func<IInjectionScope, object> Factory { get; }
     }
 }

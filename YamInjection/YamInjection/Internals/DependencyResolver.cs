@@ -15,26 +15,47 @@ namespace YamInjection.Internals
 
             var typesToResolve = injectionMapCasted.Mappings[interfaceType];
 
-            foreach (var mapping in typesToResolve)
+            return typesToResolve
+                .Select(mapping => ResolveInstanceFromMappingFromCache(injectionScope, injectionMap, parameters, mapping));
+        }
+
+        private static object ResolveInstanceFromMappingFromCache(IInjectionScope injectionScope, IInjectionMap injectionMap,
+            IInjectionParameter[] parameters, MappingBase mapping)
+        {
+            if (mapping.Resolver.GetIsAlreadyResolved(injectionScope))
             {
-                var concreteMapping = mapping as ConcreteTypeMapping;
-
-                if (concreteMapping != null)
-                {
-                    yield return ResolveConcreteType(injectionScope, injectionMap, parameters, concreteMapping);
-                }
-
-                var factorizedMapping = mapping as FactorizedMapping;
-
-                if (factorizedMapping != null)
-                {
-                    yield return factorizedMapping.Factory(injectionScope);
-                }
+                return mapping.Resolver.GetInstance(injectionScope);
             }
+
+            var newInstance = ResolveNewInstanceFromMapping(injectionScope, injectionMap, parameters, mapping);
+
+            mapping.Resolver.SetInstance(injectionScope, newInstance);
+
+            return newInstance;
+        }
+
+        private static object ResolveNewInstanceFromMapping(IInjectionScope injectionScope,
+            IInjectionMap injectionMap, IInjectionParameter[] parameters, MappingBase mapping)
+        {
+            var concreteMapping = mapping as IConcreteTypeMapping;
+
+            if (concreteMapping != null)
+            {
+                return ResolveConcreteType(injectionScope, injectionMap, parameters, concreteMapping);
+            }
+
+            var factorizedMapping = mapping as IFactorizedMapping;
+
+            if (factorizedMapping != null)
+            {
+                return factorizedMapping.Factory(injectionScope);
+            }
+
+            throw new NotSupportedException("Unsupported MappingBase type");
         }
 
         private static object ResolveConcreteType(IInjectionScope injectionScope, IInjectionMap injectionMap,
-            IInjectionParameter[] parameters, ConcreteTypeMapping concreteTypeMapping)
+            IInjectionParameter[] parameters, IConcreteTypeMapping concreteTypeMapping)
         {
             var concreteType = concreteTypeMapping.MappedConcreteType;
 

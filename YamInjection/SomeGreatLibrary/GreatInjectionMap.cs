@@ -11,7 +11,7 @@ namespace SomeGreatLibrary
 
             Map<SomeDbContext>()
                 .Using(() => new SomeDbContext("someConnectionString"))
-                .ResolveEveryRequest();
+                .ResolveOncePerScope();
         }
     }
 }

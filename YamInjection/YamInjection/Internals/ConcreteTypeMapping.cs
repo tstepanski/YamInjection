@@ -2,20 +2,15 @@ using System;
 
 namespace YamInjection.Internals
 {
-    internal abstract class MappingBase
+    internal interface IConcreteTypeMapping
     {
-        protected internal MappingBase(ResolutionEventEnum resolutionEvent)
-        {
-            ResolutionEvent = resolutionEvent;
-        }
-
-        public ResolutionEventEnum ResolutionEvent { get; }
+        Type MappedConcreteType { get; }
     }
 
-    internal sealed class ConcreteTypeMapping : MappingBase
+    internal sealed class ConcreteTypeMapping : MappingBase, IConcreteTypeMapping
     {
         internal ConcreteTypeMapping(Type mappedConcreteType, ResolutionEventEnum resolutionEvent)
-            : base(resolutionEvent)
+            : base(resolutionEvent, mappedConcreteType)
         {
             MappedConcreteType = mappedConcreteType;
         }
