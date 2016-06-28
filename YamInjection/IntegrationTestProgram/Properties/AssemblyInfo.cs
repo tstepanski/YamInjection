@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("YamInjectionTests")]
+[assembly: AssemblyTitle("IntegrationTestProgram")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Timothy M. Stepanski")]
-[assembly: AssemblyProduct("YamInjectionTests")]
+[assembly: AssemblyProduct("IntegrationTestProgram")]
 [assembly: AssemblyCopyright("Copyright © Timothy M. Stepanski 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a46a793d-b0a6-4efe-be52-c3a9f4dd7b67")]
+[assembly: Guid("6144df9e-f666-4962-9d64-b466ceb007f0")]
 
 // Version information for an assembly consists of the following four values:
 //

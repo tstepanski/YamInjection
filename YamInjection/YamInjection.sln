@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YamInjection.Tests", "YamIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeGreatLibrary", "SomeGreatLibrary\SomeGreatLibrary.csproj", "{DB877938-AA51-4E57-B6B6-AE23A0633AF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTestProgram", "IntegrationTestProgram\IntegrationTestProgram.csproj", "{6144DF9E-F666-4962-9D64-B466CEB007F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DB877938-AA51-4E57-B6B6-AE23A0633AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB877938-AA51-4E57-B6B6-AE23A0633AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB877938-AA51-4E57-B6B6-AE23A0633AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
