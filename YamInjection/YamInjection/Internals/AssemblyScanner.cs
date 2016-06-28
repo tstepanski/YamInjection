@@ -7,7 +7,7 @@ namespace YamInjection.Internals
 {
     internal sealed class AssemblyScanner
     {
-        public static IEnumerable<ConcreteAndInterfacePair> GetAllTypes(Assembly assemblyToScan)
+        internal static IEnumerable<ConcreteAndInterfacePair> GetAllTypes(Assembly assemblyToScan)
         {
             var allTypePairs = assemblyToScan
                 .GetTypes()
@@ -24,34 +24,44 @@ namespace YamInjection.Internals
 
         private static IEnumerable<ConcreteAndInterfacePair> GetTypeAndInterfaceTypePairsForType(Type type)
         {
-            var allInterfaces = GetAllInterfacesAndBaseClasses(type);
+            var allInterfaces = GetAllInheritedTypes(type);
 
             return allInterfaces.Select(interfaceType => new ConcreteAndInterfacePair(type, interfaceType));
         }
 
-        private static IEnumerable<Type> GetAllInterfacesAndBaseClasses(Type type)
+        private static IEnumerable<Type> GetAllInheritedTypes(Type type)
         {
             var thisTypesInterfaces = type.GetInterfaces();
 
-            var baseClass = type.BaseType;
+            var baseClassAndItsInterfaces = GetBaseClassAndItsInheritedTypes(type);
 
-            IEnumerable<Type> baseClassAndItsInterfaces = new List<Type>();
-
-            if (baseClass != null)
-            {
-                ((List<Type>) baseClassAndItsInterfaces).Add(baseClass);
-
-                var baseClassInterfaces = GetAllInterfacesAndBaseClasses(baseClass);
-
-                baseClassAndItsInterfaces = baseClassAndItsInterfaces.Union(baseClassInterfaces);
-            }
-
-            var thisTypesInterfacesInterfaces = thisTypesInterfaces.SelectMany(GetAllInterfacesAndBaseClasses);
+            var thisTypesInterfacesInterfaces = thisTypesInterfaces.SelectMany(GetAllInheritedTypes);
 
             return thisTypesInterfaces
                 .Union(thisTypesInterfacesInterfaces)
                 .Union(baseClassAndItsInterfaces)
                 .Distinct();
+        }
+
+        private static IEnumerable<Type> GetBaseClassAndItsInheritedTypes(Type type)
+        {
+            var baseClass = type.BaseType;
+            
+            if (baseClass == null)
+            {
+                return new Type[0];
+            }
+            
+            var baseClassInheritance = GetAllInheritedTypes(baseClass);
+
+            var baseClassInArray = new []
+            {
+                baseClass
+            };
+
+            var baseClassAndItsInheritance = baseClassInArray.Union(baseClassInheritance);
+
+            return baseClassAndItsInheritance;
         }
     }
 }

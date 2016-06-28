@@ -7,5 +7,6 @@ namespace YamInjection
         IInjectionMap Map(IInjectionMap injectionMap);
         IMapTo<TConcrete> Map<TConcrete>() where TConcrete : class;
         IResolutionEvent MapAssembly(Assembly assemblyToScan);
+        void Register();
     }
 }

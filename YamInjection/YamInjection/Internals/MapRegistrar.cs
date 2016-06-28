@@ -8,15 +8,29 @@ namespace YamInjection.Internals
         internal static void MergeMapInto(IInjectionMap source, IInjectionMap target)
         {
             var injectionMapCasted = (InjectionMap) source;
+            var mappings = injectionMapCasted.Mappings;
 
-            foreach (var mapping in injectionMapCasted.Mappings)
+            AddAllMappings(mappings, injectionMapCasted);
+        }
+
+        private static void AddAllMappings(IReadOnlyDictionary<Type, IEnumerable<MappingBase>> mappings,
+            IInjectionMap injectionMap)
+        {
+            foreach (var mapping in mappings)
             {
                 var interfaceType = mapping.Key;
+                var allMappedTypesForInterface = mapping.Value;
 
-                foreach (var typeAndResolutionProtocol in mapping.Value)
-                {
-                    AddMappingForType(injectionMapCasted, interfaceType, typeAndResolutionProtocol);
-                }
+                AddAllMappedTypesForInterface(injectionMap, interfaceType, allMappedTypesForInterface);
+            }
+        }
+
+        private static void AddAllMappedTypesForInterface(IInjectionMap injectionMap, Type interfaceType,
+            IEnumerable<MappingBase> allMappedTypesForInterface)
+        {
+            foreach (var typeAndResolutionProtocol in allMappedTypesForInterface)
+            {
+                AddMappingForType(injectionMap, interfaceType, typeAndResolutionProtocol);
             }
         }
 

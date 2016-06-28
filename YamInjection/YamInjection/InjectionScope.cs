@@ -21,7 +21,7 @@ namespace YamInjection
 
         public void Dispose()
         {
-            var undisposedChildrenScopes = _childrenScopes.Where(scope => !scope.IsDisposed);
+            var undisposedChildrenScopes = GetAllUndisposedChildrenScopes();
 
             foreach (var scope in undisposedChildrenScopes)
             {
@@ -77,5 +77,8 @@ namespace YamInjection
         }
 
         public bool IsDisposed { get; }
+
+        private IEnumerable<IInjectionScope> GetAllUndisposedChildrenScopes()
+            => _childrenScopes.Where(scope => !scope.IsDisposed);
     }
 }

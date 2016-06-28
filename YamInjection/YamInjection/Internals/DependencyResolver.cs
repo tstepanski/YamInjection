@@ -40,6 +40,11 @@ namespace YamInjection.Internals
 
             var constructor = GetFirstNonPrivateConstructorForType(concreteType);
 
+            if (constructor == null)
+            {
+                throw new NoPublicConstructorException(concreteType);
+            }
+
             var constructorParameters = constructor.GetParameters();
 
             var parameterResolutions = GetResolvedParametersInstances(injectionScope, injectionMap, parameters,
@@ -55,11 +60,6 @@ namespace YamInjection.Internals
             var constructor = concreteType
                 .GetConstructors()
                 .FirstOrDefault(info => !info.IsPrivate);
-
-            if (constructor == null)
-            {
-                throw new NoPublicConstructorException(concreteType);
-            }
 
             return constructor;
         }
