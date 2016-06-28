@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -6,11 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("YamInjection")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple Dependency Injection Engine")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Great American Insurance Group")]
+[assembly: AssemblyCompany("Timothy M. Stepanski")]
 [assembly: AssemblyProduct("YamInjection")]
-[assembly: AssemblyCopyright("Copyright © Great American Insurance Group 2016")]
+[assembly: AssemblyCopyright("Copyright © Timothy M. Stepanski 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,5 +36,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.1")]
+[assembly: AssemblyFileVersion("1.0.1.1")]
+[assembly: NeutralResourcesLanguage("en-US")]
+
