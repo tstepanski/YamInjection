@@ -16,10 +16,12 @@ namespace YamInjection.Internals
             var typesToResolve = injectionMapCasted.Mappings[interfaceType];
 
             return typesToResolve
-                .Select(mapping => ResolveInstanceFromMappingFromCache(injectionScope, injectionMap, parameters, mapping));
+                .Select(
+                    mapping => ResolveInstanceFromMappingFromCache(injectionScope, injectionMap, parameters, mapping));
         }
 
-        private static object ResolveInstanceFromMappingFromCache(IInjectionScope injectionScope, IInjectionMap injectionMap,
+        private static object ResolveInstanceFromMappingFromCache(IInjectionScope injectionScope,
+            IInjectionMap injectionMap,
             IInjectionParameter[] parameters, MappingBase mapping)
         {
             if (mapping.Resolver.GetIsAlreadyResolved(injectionScope))
@@ -73,7 +75,46 @@ namespace YamInjection.Internals
 
             var instance = constructor.Invoke(parameterResolutions.ToArray());
 
+            var instancesToApplyToPropertyInjectedProperties = GetObjectsToPropertyInject(injectionScope, injectionMap,
+                concreteType);
+
+            instance = ApplyInstancesToPropertyInjectedPropertiesOnObject(instance,
+                instancesToApplyToPropertyInjectedProperties);
+
             return instance;
+        }
+
+        private static object ApplyInstancesToPropertyInjectedPropertiesOnObject(object instance,
+            IReadOnlyDictionary<PropertyInfo, object> instancesToApply)
+        {
+            foreach (var propertyInfoAndInstance in instancesToApply)
+            {
+                var propertyInfo = propertyInfoAndInstance.Key;
+                var instanceToApply = propertyInfoAndInstance.Value;
+
+                propertyInfo.SetValue(instance, instanceToApply);
+            }
+
+            return instance;
+        }
+
+        private static IReadOnlyDictionary<PropertyInfo, object> GetObjectsToPropertyInject(
+            IInjectionScope injectionScope, IInjectionMap injectionMap, Type concreteType)
+        {
+            var dictionary = new Dictionary<PropertyInfo, object>();
+
+            var propertiesNeedingInjection = concreteType.GetProperties().WhereHasDependencyInjectAttribute();
+
+            foreach (var propertyInfo in propertiesNeedingInjection)
+            {
+                var type = propertyInfo.PropertyType;
+
+                var instance = ResolveAll(injectionScope, injectionMap, type).First();
+
+                dictionary.Add(propertyInfo, instance);
+            }
+
+            return dictionary;
         }
 
         private static ConstructorInfo GetFirstNonPrivateConstructorForType(Type concreteType)

@@ -1,4 +1,6 @@
-﻿namespace SomeGreatLibrary
+﻿using YamInjection;
+
+namespace SomeGreatLibrary
 {
     public interface ISomeGreatService
     {
@@ -13,6 +15,9 @@
         {
             _repository = repository;
         }
+
+        [DependencyInject]
+        public IRandomDoubleGenerator RandomDoubleGenerator { get; set; }
 
         public void SomeGreatMethod()
         {

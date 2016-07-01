@@ -94,5 +94,20 @@ namespace YamInjection.Tests
                 Assert.AreNotSame(greatServiceA, greatServiceB);
             }
         }
+
+        [TestMethod]
+        public void Resolve_GivenObjectWithPropertiesMarkedForPropertyInjection_ResolvesPropertyToInstance()
+        {
+            var injectionMap = new GreatInjectionMap();
+
+            using (var scope = InjectionScopeFactory.BeginNewInjectionScope())
+            {
+                scope.UseMap(injectionMap);
+
+                var service = (SomeGreatService) scope.Resolve<ISomeGreatService>();
+
+                Assert.IsNotNull(service.RandomDoubleGenerator);
+            }
+        }
     }
 }
