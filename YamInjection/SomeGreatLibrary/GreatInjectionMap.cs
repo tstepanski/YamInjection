@@ -7,6 +7,7 @@ namespace SomeGreatLibrary
         public override void Register()
         {
             MapAssembly(MyAssembly)
+                .AsAllItsInterfaces()
                 .ResolveEveryRequest();
 
             Map<SomeDbContext>()

@@ -1,27 +1,44 @@
 using System;
+using System.Collections.Generic;
 
 namespace YamInjection.Internals
 {
-    internal sealed class ConcreteMap<TConcrete> : IMapTo<TConcrete>
+    internal class ConcreteMap : IMapTo
     {
-        private readonly Type _concreteType;
-        private readonly InjectionMap _injectionMap;
+        protected readonly IEnumerable<Type> ConcreteTypes;
+        protected readonly InjectionMap InjectionMap;
 
-        internal ConcreteMap(InjectionMap injectionMap)
+        internal ConcreteMap(InjectionMap injectionMap, IEnumerable<Type> concreteTypes)
         {
-            _injectionMap = injectionMap;
-            _concreteType = typeof(TConcrete);
+            InjectionMap = injectionMap;
+            ConcreteTypes = concreteTypes;
         }
 
         public IResolutionEvent To<TInterface>() where TInterface : class
         {
             var interfaceType = typeof(TInterface);
 
-            return new InterfaceConcretePairResolutionEvent(_injectionMap, _concreteType, interfaceType);
+            return CreateConcreteResolutionEventForInterface(new[] {interfaceType});
         }
 
-        public IResolutionEvent AsSelf()
-            => new InterfaceConcretePairResolutionEvent(_injectionMap, _concreteType, _concreteType);
+        public IResolutionEvent AsSelf() => CreateConcreteResolutionEventForInterface(ConcreteTypes);
+
+        public IResolutionEvent AsAllItsInterfaces()
+        {
+            var typeAndInterfaceTypePairsForTypes = AssemblyScanner.GetTypeAndInterfaceTypePairsForTypes(ConcreteTypes);
+
+            return new AssemblyMappedResolutionEvent(InjectionMap, typeAndInterfaceTypePairsForTypes);
+        }
+
+        private IResolutionEvent CreateConcreteResolutionEventForInterface(IEnumerable<Type> interfaceTypes)
+            => new MultiInterfaceConcretePairResolutionEvent(InjectionMap, ConcreteTypes, interfaceTypes);
+    }
+
+    internal sealed class ConcreteMap<TConcrete> : ConcreteMap, IMapTo<TConcrete>
+    {
+        internal ConcreteMap(InjectionMap injectionMap) : base(injectionMap, new[] {typeof(TConcrete)})
+        {
+        }
 
         public IResolutionEvent Using(Func<TConcrete> factory)
         {
@@ -31,6 +48,6 @@ namespace YamInjection.Internals
         }
 
         public IResolutionEvent Using(Func<IInjectionScope, TConcrete> factory)
-            => new FactorizedResolutionEvent<TConcrete>(_injectionMap, factory);
+            => new FactorizedResolutionEvent<TConcrete>(InjectionMap, factory);
     }
 }

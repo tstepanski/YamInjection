@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internals\AssemblyMappedResolutionEvent.cs" />
     <Compile Include="Internals\AssemblyScanner.cs" />
     <Compile Include="Internals\ConcreteAndInterfacePair.cs" />
     <Compile Include="Internals\ConcreteMap.cs" />
@@ -52,7 +53,6 @@
     <Compile Include="IMapTo.cs" />
     <Compile Include="InjectionScope.cs" />
     <Compile Include="InjectionScopeFactory.cs" />
-    <Compile Include="Internals\AssemblyMappedResolutionEvent.cs" />
     <Compile Include="Internals\DependencyResolver.cs" />
     <Compile Include="Internals\InjectionMap.cs" />
     <Compile Include="Internals\InjectionMapSeed.cs" />

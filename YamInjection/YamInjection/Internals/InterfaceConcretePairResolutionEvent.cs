@@ -1,22 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace YamInjection.Internals
 {
-    internal sealed class InterfaceConcretePairResolutionEvent : ResolutionEventBase
+    internal sealed class MultiInterfaceConcretePairResolutionEvent : ResolutionEventBase
     {
-        private readonly Type _concreteType;
-        private readonly Type _interfaceType;
+        private readonly IEnumerable<Type> _concreteTypes;
+        private readonly IEnumerable<Type> _interfaceTypes;
 
-        internal InterfaceConcretePairResolutionEvent(InjectionMap map, Type concreteType, Type interfaceType)
-            : base(map)
+        internal MultiInterfaceConcretePairResolutionEvent(InjectionMap map, 
+            IEnumerable<Type> concreteType, IEnumerable<Type> interfaceTypes) : base(map)
         {
-            _concreteType = concreteType;
-            _interfaceType = interfaceType;
+            _concreteTypes = concreteType;
+            _interfaceTypes = interfaceTypes;
         }
 
         protected override void CompleteMapping(ResolutionEventEnum resolutionEventEnum)
         {
-            MapRegistrar.RegisterMapping(Map, _concreteType, _interfaceType, resolutionEventEnum);
+            foreach (var concreteType in _concreteTypes)
+            {
+                RegisterMappingTypeAndAllInterfaces(resolutionEventEnum, concreteType);
+            }
+        }
+
+        private void RegisterMappingTypeAndAllInterfaces(ResolutionEventEnum resolutionEventEnum, Type concreteType)
+        {
+            foreach (var interfaceType in _interfaceTypes)
+            {
+                MapRegistrar.RegisterMapping(Map, concreteType, interfaceType, resolutionEventEnum);
+            }
         }
     }
 }

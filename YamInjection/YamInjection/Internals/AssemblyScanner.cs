@@ -9,27 +9,32 @@ namespace YamInjection.Internals
     {
         internal static IEnumerable<ConcreteAndInterfacePair> GetAllTypes(Assembly assemblyToScan)
         {
-            var allTypePairs = assemblyToScan
-                .GetTypes()
-                .Where(IsTypeInstantiatable)
-                .SelectMany(GetTypeAndInterfaceTypePairsForType);
+            var allInstantiatableTypes = GetAllInstantiatableTypesFromMethod(assemblyToScan);
+
+            var allTypePairs = GetTypeAndInterfaceTypePairsForTypes(allInstantiatableTypes);
 
             return allTypePairs;
         }
+
+        public static IEnumerable<Type> GetAllInstantiatableTypesFromMethod(Assembly assemblyToScan)
+            => assemblyToScan.GetTypes().Where(IsTypeInstantiatable);
 
         private static bool IsTypeInstantiatable(Type type)
         {
             return !type.IsAbstract && !type.IsInterface;
         }
 
-        private static IEnumerable<ConcreteAndInterfacePair> GetTypeAndInterfaceTypePairsForType(Type type)
+        public static IEnumerable<ConcreteAndInterfacePair> GetTypeAndInterfaceTypePairsForTypes(IEnumerable<Type> types)
+            => types.SelectMany(GetTypeAndInterfaceTypePairsForType);
+
+        public static IEnumerable<ConcreteAndInterfacePair> GetTypeAndInterfaceTypePairsForType(Type type)
         {
             var allInterfaces = GetAllInheritedTypes(type);
 
             return allInterfaces.Select(interfaceType => new ConcreteAndInterfacePair(type, interfaceType));
         }
 
-        private static IEnumerable<Type> GetAllInheritedTypes(Type type)
+        public static IEnumerable<Type> GetAllInheritedTypes(Type type)
         {
             var thisTypesInterfaces = type.GetInterfaces();
 
@@ -46,15 +51,15 @@ namespace YamInjection.Internals
         private static IEnumerable<Type> GetBaseClassAndItsInheritedTypes(Type type)
         {
             var baseClass = type.BaseType;
-            
+
             if (baseClass == null)
             {
                 return new Type[0];
             }
-            
+
             var baseClassInheritance = GetAllInheritedTypes(baseClass);
 
-            var baseClassInArray = new []
+            var baseClassInArray = new[]
             {
                 baseClass
             };

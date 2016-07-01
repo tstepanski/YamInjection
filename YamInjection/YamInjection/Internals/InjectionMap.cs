@@ -15,13 +15,13 @@ namespace YamInjection.Internals
             BeginRegistration();
         }
 
-        private void BeginRegistration() => Register();
-
-        public abstract void Register();
-
         internal IReadOnlyDictionary<Type, IEnumerable<MappingBase>> Mappings => _mappings;
 
         protected Assembly MyAssembly => Assembly.GetAssembly(GetType());
+
+        public IMapTo Map(IEnumerable<Type> concreteTypes) => new ConcreteMap(this, concreteTypes);
+
+        public abstract void Register();
 
         public IInjectionMap Map(IInjectionMap injectionMap)
         {
@@ -32,11 +32,15 @@ namespace YamInjection.Internals
 
         public IMapTo<TConcrete> Map<TConcrete>() where TConcrete : class => new ConcreteMap<TConcrete>(this);
 
-        public IResolutionEvent MapAssembly(Assembly assemblyToScan)
+        public IMapTo MapAssembly(Assembly assemblyToScan)
         {
-            var concreteAndInterfacePairs = AssemblyScanner.GetAllTypes(assemblyToScan);
+            var allTypesToMapFrom = AssemblyScanner.GetAllInstantiatableTypesFromMethod(assemblyToScan);
 
-            return new AssemblyMappedResolutionEvent(this, concreteAndInterfacePairs);
+            return Map(allTypesToMapFrom);
         }
+
+        public IMapTo Map(Type concreteType) => Map(new[] {concreteType});
+
+        private void BeginRegistration() => Register();
     }
 }

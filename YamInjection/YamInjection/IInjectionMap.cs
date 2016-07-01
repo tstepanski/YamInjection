@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace YamInjection
@@ -6,7 +8,9 @@ namespace YamInjection
     {
         IInjectionMap Map(IInjectionMap injectionMap);
         IMapTo<TConcrete> Map<TConcrete>() where TConcrete : class;
-        IResolutionEvent MapAssembly(Assembly assemblyToScan);
+        IMapTo MapAssembly(Assembly assemblyToScan);
+        IMapTo Map(Type concreteType);
+        IMapTo Map(IEnumerable<Type> concreteTypes);
         void Register();
     }
 }
