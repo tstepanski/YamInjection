@@ -55,11 +55,17 @@ namespace YamInjection
         public IEnumerable<T> ResolveAll<T>() => ResolveAll<T>(new IInjectionParameter[0]);
 
         public IEnumerable<T> ResolveAll<T>(params IInjectionParameter[] parameters)
-        {
-            var interfaceType = typeof(T);
+            => ResolveAll(typeof(T), parameters).Cast<T>();
 
-            return DependencyResolver.ResolveAll(this, _injectionMap, interfaceType, parameters).Cast<T>();
-        }
+        public object Resolve(Type type) => Resolve(type, new IInjectionParameter[0]);
+
+        public object Resolve(Type type, params IInjectionParameter[] parameters)
+            => ResolveAll(type, parameters).First();
+
+        public IEnumerable<object> ResolveAll(Type type) => ResolveAll(type, new IInjectionParameter[0]);
+
+        public IEnumerable<object> ResolveAll(Type type, params IInjectionParameter[] parameters)
+            => DependencyResolver.ResolveAll(this, _injectionMap, type, parameters);
 
         public bool TryResolve<T>(out T resolvedValue) => TryResolve(out resolvedValue, new IInjectionParameter[0]);
 
@@ -74,6 +80,25 @@ namespace YamInjection
             catch (Exception)
             {
                 resolvedValue = default(T);
+
+                return false;
+            }
+        }
+
+        public bool TryResolve(Type type, out object resolvedValue)
+            => TryResolve(type, out resolvedValue, new IInjectionParameter[0]);
+
+        public bool TryResolve(Type type, out object resolvedValue, params IInjectionParameter[] parameters)
+        {
+            try
+            {
+                resolvedValue = Resolve(type, parameters);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                resolvedValue = type.IsValueType ? Activator.CreateInstance(type) : null;
 
                 return false;
             }
