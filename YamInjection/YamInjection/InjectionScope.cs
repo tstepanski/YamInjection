@@ -65,7 +65,7 @@ namespace YamInjection
         public IEnumerable<object> ResolveAll(Type type) => ResolveAll(type, new IInjectionParameter[0]);
 
         public IEnumerable<object> ResolveAll(Type type, params IInjectionParameter[] parameters)
-            => DependencyResolver.ResolveAll(this, _injectionMap, type, parameters);
+            => DependencyResolver.ResolveAll(this, type, parameters);
 
         public bool TryResolve<T>(out T resolvedValue) => TryResolve(out resolvedValue, new IInjectionParameter[0]);
 

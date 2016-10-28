@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeGreatLibrary", "SomeGre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTestProgram", "IntegrationTestProgram\IntegrationTestProgram.csproj", "{6144DF9E-F666-4962-9D64-B466CEB007F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YamInjection.Web", "YamInjection.Web\YamInjection.Web.csproj", "{7D149499-3F04-46C9-AB5D-855E5FB5D03A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSite", "TestWebSite\TestWebSite.csproj", "{2B723B0D-B360-409E-A088-7BB95BAFA484}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6144DF9E-F666-4962-9D64-B466CEB007F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D149499-3F04-46C9-AB5D-855E5FB5D03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D149499-3F04-46C9-AB5D-855E5FB5D03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D149499-3F04-46C9-AB5D-855E5FB5D03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D149499-3F04-46C9-AB5D-855E5FB5D03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B723B0D-B360-409E-A088-7BB95BAFA484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B723B0D-B360-409E-A088-7BB95BAFA484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B723B0D-B360-409E-A088-7BB95BAFA484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B723B0D-B360-409E-A088-7BB95BAFA484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

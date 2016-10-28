@@ -2,7 +2,7 @@
 
 namespace YamInjection.Internals
 {
-    public abstract class Resolver
+    internal abstract class Resolver
     {
         protected readonly Type TypeToResolveFor;
 
